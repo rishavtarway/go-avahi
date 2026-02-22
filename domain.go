@@ -59,6 +59,7 @@ func DomainSlice(d string) []string {
 	// Allocate decode buffer. len(d) must be enough.
 	buflen := C.size_t(len(d))
 	buf := C.malloc(buflen)
+	defer C.free(unsafe.Pointer(buf))
 
 	// Decode label by label
 	labels := []string{}
